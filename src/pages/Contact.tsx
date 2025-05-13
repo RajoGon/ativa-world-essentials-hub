@@ -1,51 +1,9 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import Layout from '@/components/Layout';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
+import ContactForm from '@/components/ContactForm';
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    subject: '',
-    message: '',
-  });
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setLoading(false);
-      toast({
-        title: "Message Sent",
-        description: "We've received your message and will get back to you soon.",
-      });
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        subject: '',
-        message: '',
-      });
-    }, 1500);
-  };
-
   return (
     <Layout>
       {/* Hero Section */}
@@ -142,93 +100,7 @@ const Contact = () => {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
                 <h2 className="text-2xl font-bold mb-6 text-metallic-900">Send Us a Message</h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-metallic-700 mb-1">
-                        Your Name*
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full border-gray-300 focus:border-sage-500 focus:ring-sage-500"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-metallic-700 mb-1">
-                        Email Address*
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full border-gray-300 focus:border-sage-500 focus:ring-sage-500"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="company" className="block text-sm font-medium text-metallic-700 mb-1">
-                        Company Name
-                      </label>
-                      <Input
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        className="w-full border-gray-300 focus:border-sage-500 focus:ring-sage-500"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-metallic-700 mb-1">
-                        Subject*
-                      </label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        className="w-full border-gray-300 focus:border-sage-500 focus:ring-sage-500"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-metallic-700 mb-1">
-                      Your Message*
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      rows={5}
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      className="w-full border-gray-300 focus:border-sage-500 focus:ring-sage-500"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Button
-                      type="submit"
-                      className="bg-sage-500 hover:bg-sage-600 w-full md:w-auto"
-                      disabled={loading}
-                    >
-                      {loading ? 'Sending...' : 'Send Message'}
-                    </Button>
-                  </div>
-                </form>
+                <ContactForm />
               </div>
             </div>
           </div>
